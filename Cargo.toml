@@ -21,3 +21,4 @@ embedded-hal = "0.2.1"
 
 [features]
 mosi_idle_high = []
+rgb_order = []

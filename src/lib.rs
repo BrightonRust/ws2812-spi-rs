@@ -101,9 +101,15 @@ where
 
         for item in iterator {
             let item = item.into();
-            self.write_byte(item.g)?;
-            self.write_byte(item.r)?;
-            self.write_byte(item.b)?;
+            if cfg!(feature = "rgb_order") {
+                self.write_byte(item.r)?;
+                self.write_byte(item.g)?;
+                self.write_byte(item.b)?;
+            } else {
+                self.write_byte(item.g)?;
+                self.write_byte(item.r)?;
+                self.write_byte(item.b)?;
+            }
         }
         self.flush()?;
         Ok(())
